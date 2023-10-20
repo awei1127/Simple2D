@@ -6,12 +6,13 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
     float speed = 5.0f;
-    float InteractRange = 1;
+    float interactRange = 1;
     Rigidbody2D rb;
     Vector2 moveDirection;
     Animator animator;
     public GameDirector gameDirector;
     public DialogueManager dialogueManager;
+    public DialogueOptionManager dialogueOptionManager;
     
     void Start()
     {
@@ -50,7 +51,7 @@ public class PlayerController : MonoBehaviour
                     // 取得layer
                     LayerMask layerMask = LayerMask.GetMask("Interactable");
                     // 發射射線
-                    RaycastHit2D hitInfo = Physics2D.Raycast(transform.position, dir, InteractRange, layerMask);
+                    RaycastHit2D hitInfo = Physics2D.Raycast(transform.position, dir, interactRange, layerMask);
                     // 如果有碰到碰撞器，嘗試取得interface組件，若取得，執行interface的互動方法
                     if (hitInfo.collider != null)
                     {
@@ -71,6 +72,18 @@ public class PlayerController : MonoBehaviour
                 if (Input.GetKeyDown(KeyCode.Space))
                 {
                     dialogueManager.ContinueDialogue();
+                }
+                break;
+
+            case GameState.Selecting:
+                // 如果玩家按上下箭頭
+                if (Input.GetKeyDown(KeyCode.UpArrow))
+                {
+                    dialogueOptionManager.SelectPrevious();
+                }
+                if (Input.GetKeyDown(KeyCode.DownArrow))
+                {
+                    dialogueOptionManager.SelectNext();
                 }
                 break;
 

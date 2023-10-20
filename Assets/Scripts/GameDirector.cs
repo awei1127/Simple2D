@@ -6,6 +6,7 @@ public enum GameState
 {
     Exploring,
     Dialogue,
+    Selecting,
     Paused
 }
 
@@ -29,6 +30,9 @@ public class GameDirector : MonoBehaviour
                 break;
             case GameState.Dialogue:
                 Debug.Log("已經切換到對話狀態");
+                break;
+            case GameState.Selecting:
+                Debug.Log("已經切換到選擇狀態");
                 break;
             case GameState.Paused:
                 Debug.Log("已經切換到暫停狀態");

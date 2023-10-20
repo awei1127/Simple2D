@@ -8,14 +8,14 @@ public class DialogueManager : MonoBehaviour
 {
     public TextMeshProUGUI dialogueText;
     public TextMeshProUGUI nameText;
-    public GameObject DialogueBox;
+    public GameObject dialogueBox;
     public float textSpeed;
     private Queue<Sentence> sentences;
     private List<Option> options;
     private Sentence sentence;
     public GameDirector gameDirector;
     private Action dialogueEndCallback;
-    public DialogueOptionManager DialogueOptionManager;
+    public DialogueOptionManager dialogueOptionManager;
     
 
 
@@ -28,7 +28,7 @@ public class DialogueManager : MonoBehaviour
     {
         gameDirector.SetGameState(GameState.Dialogue);
 
-        DialogueBox.SetActive(true);
+        dialogueBox.SetActive(true);
 
         sentences.Clear();
 
@@ -63,10 +63,9 @@ public class DialogueManager : MonoBehaviour
             // 如果有選項要秀給玩家選擇
             if (options.Count > 0)
             {
-                DialogueOptionManager.ShowOptions(options);
+                dialogueOptionManager.ShowOptions(options);
                 return;
             }
-
             EndDialogue();
             return;
         }
@@ -89,7 +88,7 @@ public class DialogueManager : MonoBehaviour
 
     void EndDialogue()
     {
-        DialogueBox.SetActive(false);
+        dialogueBox.SetActive(false);
 
         dialogueEndCallback?.Invoke();
         dialogueEndCallback = null;
